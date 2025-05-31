@@ -4,9 +4,9 @@
   --button-bg: #ffd6e0;
   --button-hover: #f8bbd0;
   --confetti-color: #f06292;
-  --bokeh-1: rgba(255,192,203,0.2);
-  --bokeh-2: rgba(255,182,193,0.2);
-  --bokeh-3: rgba(255,105,180,0.1);
+  --bokeh-1: rgba(255, 192, 203, 0.2);
+  --bokeh-2: rgba(255, 182, 193, 0.2);
+  --bokeh-3: rgba(255, 105, 180, 0.1);
 }
 
 body.dark {
@@ -63,10 +63,7 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background:
-    radial-gradient(circle at 20% 30%, var(--bokeh-1) 0%, transparent 70%),
-    radial-gradient(circle at 80% 60%, var(--bokeh-2) 0%, transparent 70%),
-    radial-gradient(circle at 50% 50%, var(--bokeh-3) 0%, transparent 70%);
+  background: radial-gradient(circle at 20% 30%, var(--bokeh-1) 0%, transparent 70%), radial-gradient(circle at 80% 60%, var(--bokeh-2) 0%, transparent 70%), radial-gradient(circle at 50% 50%, var(--bokeh-3) 0%, transparent 70%);
   z-index: 0;
   pointer-events: none;
   animation: pulse 12s infinite alternate ease-in-out;
@@ -77,6 +74,7 @@ body::before {
     opacity: 0.6;
     transform: scale(1);
   }
+
   100% {
     opacity: 1;
     transform: scale(1.1);
@@ -104,6 +102,7 @@ p {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -143,6 +142,7 @@ img:hover {
     transform: translateY(0) rotate(0deg);
     opacity: 1;
   }
+
   100% {
     transform: translateY(calc(100vh + 20px)) rotate(720deg);
     opacity: 0.3;
@@ -153,15 +153,19 @@ img:hover {
   0% {
     filter: drop-shadow(0 0 6px hsl(0, 100%, 75%));
   }
+
   25% {
     filter: drop-shadow(0 0 6px hsl(90, 100%, 75%));
   }
+
   50% {
     filter: drop-shadow(0 0 6px hsl(180, 100%, 75%));
   }
+
   75% {
     filter: drop-shadow(0 0 6px hsl(270, 100%, 75%));
   }
+
   100% {
     filter: drop-shadow(0 0 6px hsl(360, 100%, 75%));
   }
@@ -277,24 +281,36 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans:wght@400;600&display=swap');
 
 .box-button {
   cursor: pointer;
   border: 2px dashed #ff6b81;
-  background: linear-gradient(135deg, #ffe6ea, #fff5f7);
   border-radius: 20px;
   padding: 25px 30px;
-  transition: all 0.3s ease-in-out;
+
+  /* Gabungkan gambar latar dan gradient */
+  background-image: 
+    url('https://media.istockphoto.com/photos/love-letter-picture-id172648295?k=6&m=172648295&s=612x612&w=0&h=Fds3cRciOoFVGhv9QSqrL9I-HEbHc0Nev9Qyl5aVx0U='),
+    linear-gradient(135deg, #ffe6ea, #fff5f7);
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+
   display: inline-block;
   box-shadow: 0 8px 20px rgba(255, 105, 135, 0.25);
-  animation: float 4s ease-in-out infinite;
   position: relative;
   font-family: 'Open Sans', sans-serif;
+  color: #d81b60;
+
+  /* Tambahkan transisi 1 detik untuk background, transform, dan box-shadow */
+  transition: background-image 1s ease, transform 1s ease, box-shadow 1s ease;
+  animation: float 4s ease-in-out infinite;
 }
 
-.box-button::before, .box-button::after {
+/* Emoji surat di pojok */
+.box-button::before,
+.box-button::after {
   content: "💌";
   position: absolute;
   font-size: 2em;
@@ -311,16 +327,21 @@ body {
   right: -10px;
 }
 
+/* Saat hover, gradient berubah dengan efek fade selama 1 detik */
 .box-button:hover {
-  background: linear-gradient(135deg, #ffdfe6, #fff0f3);
+  background-image: 
+    url('https://sandrasshelf.com/wp-content/uploads/2022/02/Untitled-design-2-1024x1024.png'),
+    linear-gradient(135deg, #ffdfe6, #fff0f3);
   transform: scale(1.05);
   box-shadow: 0 10px 24px rgba(255, 105, 135, 0.4);
 }
 
+/* Saat ditekan */
 .box-button:active {
   transform: translateY(8px) scale(0.98);
 }
 
+/* Style tombol di dalam surat */
 .button {
   background-color: #ff9d9d;
   border: 3px solid #fff;
@@ -338,6 +359,36 @@ body {
   letter-spacing: 1px;
 }
 
+/* Animasi float lembut */
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Responsif untuk layar lebih kecil */
+@media (max-width: 480px) {
+  .box-button {
+    width: 90%;
+    padding: 20px;
+    background-size: cover, cover;
+  }
+  .box-button::before {
+    width: 40px;
+    top: -15px;
+  }
+  .button {
+    font-size: 1em;
+    padding: 6px 12px;
+  }
+}
+
 .teks-hadiah {
   color: white;
   font-weight: bolder;
@@ -347,15 +398,19 @@ body {
   body {
     padding: 20px;
   }
+
   #scene {
     max-width: 100%;
   }
+
   h1 {
     font-size: 1.5rem;
   }
+
   p {
     font-size: 1rem;
   }
+
   button {
     font-size: 0.9rem;
     padding: 12px 24px;
@@ -367,9 +422,11 @@ body {
   0% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-5px);
   }
+
   100% {
     transform: translateY(0);
   }
