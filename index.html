@@ -26,7 +26,7 @@
     <div id="scene" style="font-family: 'Dancing Script', cursive"></div>
     <div class="button-group" style="font-family: 'Dancing Script', cursive">
       <button id="nextBtn" onclick="nextScene()">➜ &nbsp; Lanjut</button>
-      <button onclick="toggleDarkMode()">🌗 &nbsp; Mode</button>
+      <button id="modeToggleBtn" onclick="toggleDarkMode()">🌞 &nbsp; Mode</button>
     </div>
 
     <audio id="bgm" loop>
@@ -184,7 +184,12 @@
       }
 
       function toggleDarkMode() {
-        document.body.classList.toggle('dark')
+        const body = document.body;
+        const btn = document.getElementById('modeToggleBtn');
+
+        const isDark = body.classList.toggle('dark');
+
+        btn.innerHTML = isDark ? '🌙 &nbsp; Mode' : '🌞 &nbsp; Mode';
       }
 
       function openPopup(title, description) {

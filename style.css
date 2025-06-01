@@ -41,6 +41,7 @@ body {
   position: relative;
   transition: color 0.5s ease;
   animation: skyCycle 60s infinite ease-in-out;
+  transition: background-image 1s ease-in-out, color 0.5s ease;
 }
 
 @keyframes skyCycle {
@@ -98,6 +99,7 @@ body::before {
   z-index: 0;
   pointer-events: none;
   animation: pulse 14s infinite alternate ease-in-out;
+  transition: background 1s ease-in-out;
 }
 
 @keyframes pulse {
