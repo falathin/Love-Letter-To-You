@@ -318,7 +318,10 @@ body {
   border: 2px dashed rgba(224, 247, 250, 0.5);
   border-radius: 20px;
   padding: 25px 30px;
-  background-image: url('https://media.istockphoto.com/photos/rainy-window-background-picture-id1225248579?k=6&m=1225248579&s=612x612&w=0&h=Qe5EmJ0cGj6GyBnv-6qSlFIQeT1iuPhITdk3DB4J9Uo='), var(--bg-color-1);
+  /* Layer 1: gambar jendela hujan, Layer 2: gradasi warna variabel */
+  background-image:
+    url('https://media.istockphoto.com/photos/rainy-window-background-picture-id1225248579?k=6&m=1225248579&s=612x612&w=0&h=Qe5EmJ0cGj6GyBnv-6qSlFIQeT1iuPhITdk3DB4J9Uo='),
+    var(--bg-color-1);
   background-size: cover, cover;
   background-position: center, center;
   background-repeat: no-repeat, no-repeat;
@@ -331,12 +334,32 @@ body {
   animation: float 4s ease-in-out infinite;
 }
 
+/* Tambahkan aturan khusus untuk <a> di dalam .box-button */
+.box-button a {
+  background-color: transparent;     /* benar-benar transparan */
+  text-decoration: none;             /* hilangkan garis bawah default */
+  color: var(--text-color);          /* agar teks/ikon wpp berwarna sesuai variabel */
+  position: relative;                /* supaya kita bisa beri z-index */
+  z-index: 2;                        /* di atas pseudo-elemen 💧 agar bisa diklik */
+  display: inline-flex;              /* memudahkan styling ikon + teks */
+  align-items: center;               /* vertical-align sentris */
+  gap: 6px;                          /* jarak ikon dengan nomor */
+  padding: 4px 8px;                  /* beri area klik yang cukup */
+}
+
+/* Jika ada ikon <i class="bi bi-whatsapp"> di dalam <a>, atur ukuran dan klik mudah */
+.box-button a i.bi-whatsapp {
+  font-size: 1.2em;                  /* sedikit lebih besar jika perlu */
+}
+
+/* Pseudo-elemen “💧” di pojok box */
 .box-button::before,
 .box-button::after {
   content: "💧";
   position: absolute;
   font-size: 2em;
   opacity: 0.3;
+  z-index: 1;  /* pastikan di bawah konten utama (.box-button a) */
 }
 
 .box-button::before {
@@ -350,7 +373,9 @@ body {
 }
 
 .box-button:hover {
-  background-image: url('https://media.istockphoto.com/photos/light-rain-on-window-picture-id1396646978?k=6&m=1396646978&s=612x612&w=0&h=4vP1qjAyjzdZ_5IY_VB8osWdlUEHKSCmVpwtvAkSHZw='), var(--bg-color-3);
+  background-image:
+    url('https://media.istockphoto.com/photos/light-rain-on-window-picture-id1396646978?k=6&m=1396646978&s=612x612&w=0&h=4vP1qjAyjzdZ_5IY_VB8osWdlUEHKSCmVpwtvAkSHZw='),
+    var(--bg-color-3);
   transform: scale(1.05);
   box-shadow: 0 10px 24px rgba(20, 40, 60, 0.4);
 }
@@ -359,6 +384,14 @@ body {
   transform: translateY(8px) scale(0.98);
 }
 
+/* Animasi naik-turun */
+@keyframes float {
+  0%   { transform: translateY(0);   }
+  50%  { transform: translateY(-5px); }
+  100% { transform: translateY(0);   }
+}
+
+/* Styling tombol “popup” di dalam .box-button (jika terdapat <div class="button">) */
 .button {
   background-color: rgba(144, 164, 174, 0.8);
   border: 3px solid #ffffff;
@@ -374,18 +407,6 @@ body {
 
 .button span {
   letter-spacing: 1px;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-  100% {
-    transform: translateY(0);
-  }
 }
 
 .teks-hadiah {
@@ -436,4 +457,57 @@ body {
 body {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.language-selector {
+  margin: 1rem; /* m-3 */
+  margin-top: 3em;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75em;
+  text-align: center;
+  flex-wrap: wrap; /* Agar label dan select bisa turun baris jika layar sempit */
+}
+
+.language-selector label {
+  font-weight: 600;
+  font-size: 1rem;
+  color: rgb(255, 255, 255);
+}
+
+.language-selector select {
+  padding: 0.6em 1.2em;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #dbeafe, #f0f9ff);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+  font-size: 1rem;
+  color: #1e3a8a;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  appearance: none;
+  outline: none;
+  min-width: 180px; /* Supaya tombol tidak terlalu kecil di HP */
+}
+
+/* RESPONSIF UNTUK LAYAR KECIL */
+@media (max-width: 600px) {
+  .language-selector {
+    flex-direction: column;
+    gap: 0.5em;
+  }
+
+  .language-selector label {
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+  .language-selector select {
+    font-size: 0.95rem;
+    padding: 0.5em 1em;
+    width: 100%;
+    max-width: 250px;
+  }
 }
